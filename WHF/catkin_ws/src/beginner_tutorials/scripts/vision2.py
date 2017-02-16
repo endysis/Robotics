@@ -5,6 +5,7 @@ import cv2
 import numpy
 from sensor_msgs.msg import Image
 from std_msgs.msg import String
+from std_msgs.msg import Float32
 from cv_bridge import CvBridge, CvBridgeError
 
 
@@ -19,10 +20,8 @@ class image_converter:
      
         self.image_sub = rospy.Subscriber("/turtlebot_1/camera/rgb/image_raw",Image, self.callback)
         
-        self.pub = rospy.Publisher('/result_topic',String)      
+        self.pub = rospy.Publisher('/result_topic',String)
 
-        
-        
         
         
     def callback(self, data):
@@ -65,6 +64,8 @@ class image_converter:
             print 'A: ' + str(a)
             if a > 0:
                 cv2.drawContours(cv_image, c, -1, (255, 0, 0))
+                
+        
                 
         print '===='
         cv2.imshow("Image window", cv_image)
