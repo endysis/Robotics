@@ -31,14 +31,13 @@ class image_converter:
         except CvBridgeError, e:
             print e
             
-       # bgr_thresh = cv2.inRange(cv_image,
-       #                          numpy.array((200, 230, 230)),
-       #                          numpy.array((255, 255, 255)))
 
         hsv_img = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
         hsv_thresh = cv2.inRange(hsv_img,
-                                 numpy.array((20, 30, 100)),
+                                 numpy.array((60, 100, 100)),
                                  numpy.array((255, 255, 255)))
+                                 
+        ##SAMPLE RANGES##
 
   
         
@@ -51,11 +50,6 @@ class image_converter:
         print numpy.mean(hsv_img[:, :, 2])
         self.pub.publish(str(numpy.mean(hsv_img[:, :, 2])))
 
-
-       # bgr_contours, hierachy = cv2.findContours(bgr_thresh.copy(),
-        #                                          cv2.RETR_TREE,
-         #                                         cv2.CHAIN_APPROX_SIMPLE)
-
         hsv_contours, hierachy = cv2.findContours(hsv_thresh.copy(),
                                                   cv2.RETR_TREE,
                                                   cv2.CHAIN_APPROX_SIMPLE)
@@ -64,6 +58,8 @@ class image_converter:
             print 'A: ' + str(a)
             if a > 0:
                 cv2.drawContours(cv_image, c, -1, (255, 0, 0))
+                print(c.x)
+            
                 
         
                 

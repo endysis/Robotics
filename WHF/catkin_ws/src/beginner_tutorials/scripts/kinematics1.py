@@ -35,6 +35,9 @@ class Kinematics:
         twistMsg.linear.x = v
         twistMsg.angular.z = a
         
+        print("\n--- Twist Message ---")        
+        print(twistMsg)
+        
         self.cmd_vel.publish(twistMsg)
     
             
@@ -49,5 +52,4 @@ def forward_kinematics(w_l, w_r):
         
     
 Kinematics()
-rospy.init_node('Kinematics', anonymous=True)
 rospy.spin()
